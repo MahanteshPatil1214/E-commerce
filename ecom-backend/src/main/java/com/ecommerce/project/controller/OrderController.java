@@ -1,8 +1,8 @@
 package com.ecommerce.project.controller;
 
-import com.ecommerce.project.payload.OrderDTO;
-import com.ecommerce.project.payload.OrderRequestDTO;
-import com.ecommerce.project.payload.StripePaymentDTO;
+import com.ecommerce.project.config.AppConstants;
+import com.ecommerce.project.payload.*;
+import com.ecommerce.project.security.services.UserDetailImpl;
 import com.ecommerce.project.service.OrderService;
 import com.ecommerce.project.service.StripeService;
 import com.ecommerce.project.util.AuthUtil;
@@ -11,6 +11,7 @@ import com.stripe.model.PaymentIntent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -47,5 +48,43 @@ public class OrderController {
         PaymentIntent paymentIntent = stripeService.paymentIntent(stripePaymentDTO);
         return new ResponseEntity<>(paymentIntent.getClientSecret(),HttpStatus.CREATED);
 
+    }
+
+    @GetMapping("/admin/orders")
+    public ResponseEntity<OrderResponse> getAllOrders(
+            @RequestParam(name = "pageNumber" ,defaultValue = AppConstants.PAGE_NUMBER ,required = false)Integer pageNumber,
+            @RequestParam(name = "pageSize",defaultValue = AppConstants.PAGE_SIZE ,required = false )Integer pageSize,
+            @RequestParam(name = "sortBy",defaultValue = AppConstants.SORT_ORDERS_BY ,required = false )String sortBY,
+            @RequestParam(name = "sortOrder" ,defaultValue = AppConstants.SORT_DIR ,required = false) String sortOrder
+    ){
+       OrderResponse orderResponse = orderService.getAllOrders(pageNumber,pageSize,sortBY,sortOrder);
+       return new ResponseEntity<OrderResponse>(orderResponse,HttpStatus.OK);
+    }
+
+    @GetMapping("/seller/orders")
+    public ResponseEntity<OrderResponse> getAllSellerOrders(
+            @RequestParam(name = "pageNumber" ,defaultValue = AppConstants.PAGE_NUMBER ,required = false)Integer pageNumber,
+            @RequestParam(name = "pageSize",defaultValue = AppConstants.PAGE_SIZE ,required = false )Integer pageSize,
+            @RequestParam(name = "sortBy",defaultValue = AppConstants.SORT_ORDERS_BY ,required = false )String sortBY,
+            @RequestParam(name = "sortOrder" ,defaultValue = AppConstants.SORT_DIR ,required = false) String sortOrder
+    ){
+        OrderResponse orderResponse = orderService.getAllSellerOrders(pageNumber,pageSize,sortBY,sortOrder);
+        return new ResponseEntity<OrderResponse>(orderResponse,HttpStatus.OK);
+    }
+
+
+    @PutMapping("admin/orders/{orderId}/status")
+    public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable Long orderId,
+                                                      @RequestBody OrderStatusUpdateDTO orderStatusUpdateDTO){
+        OrderDTO order = orderService.updateOrder(orderId,orderStatusUpdateDTO.getStatus());
+        return new ResponseEntity<OrderDTO>(order,HttpStatus.OK);
+
+    }
+
+    @PutMapping("/seller/orders/{orderId}/status")
+    public ResponseEntity<OrderDTO> updateOrderStatusSeller(@PathVariable Long orderId,
+                                                            @RequestBody OrderStatusUpdateDTO orderStatusUpdateDto) {
+        OrderDTO order = orderService.updateOrder(orderId, orderStatusUpdateDto.getStatus());
+        return new ResponseEntity<OrderDTO>(order, HttpStatus.OK);
     }
 }

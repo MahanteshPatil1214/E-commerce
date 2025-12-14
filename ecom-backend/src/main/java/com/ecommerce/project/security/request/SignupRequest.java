@@ -19,7 +19,15 @@ public class SignupRequest {
     @Email
     private String email;
 
-    private Set<String> roles;
+    private Set<String> role;
+
+    public Set<String> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<String> role) {
+        this.role = role;
+    }
 
     @NotBlank
     @Size(min = 6 ,max = 40)
