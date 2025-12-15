@@ -44,10 +44,10 @@ public class OrderController {
     }
 
     @PostMapping("/order/stripe-client-secret")
-    public ResponseEntity<String> createStripeClientSecret(@RequestBody StripePaymentDTO stripePaymentDTO) throws StripeException {
-        PaymentIntent paymentIntent = stripeService.paymentIntent(stripePaymentDTO);
-        return new ResponseEntity<>(paymentIntent.getClientSecret(),HttpStatus.CREATED);
-
+    public ResponseEntity<String> createStripeClientSecret(@RequestBody StripePaymentDTO stripePaymentDto) throws StripeException {
+        System.out.println("StripePaymentDTO Received " + stripePaymentDto);
+        PaymentIntent paymentIntent = stripeService.paymentIntent(stripePaymentDto);
+        return new ResponseEntity<>(paymentIntent.getClientSecret(), HttpStatus.CREATED);
     }
 
     @GetMapping("/admin/orders")

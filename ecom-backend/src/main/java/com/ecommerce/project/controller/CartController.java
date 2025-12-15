@@ -26,6 +26,8 @@ public class CartController {
     @Autowired
     private CartRepository cartRepository;
 
+
+
     @PostMapping("/carts/products/{productId}/quantity/{quantity}")
     public ResponseEntity<CartDTO> addProductToCart(@PathVariable Long productId, @PathVariable Integer quantity) {
         CartDTO cartDTO = cartService.addProductToCart(productId, quantity);
@@ -44,7 +46,7 @@ public class CartController {
         Cart cart = cartRepository.findCartByEmail(emailId);
         Long cartId = cart.getCartId();
         CartDTO cartDTOS = cartService.getCart(emailId, cartId);
-        return new ResponseEntity<CartDTO>(cartDTOS, HttpStatus.FOUND);
+        return new ResponseEntity<CartDTO>(cartDTOS, HttpStatus.OK);
     }
 
     @PutMapping("/cart/products/{productId}/quantity/{operation}")

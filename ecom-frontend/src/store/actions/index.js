@@ -1,4 +1,5 @@
 import api from "../../api/api"
+import toast from 'react-hot-toast';
 
 export const fetchProducts = (queryString) => async (dispatch) => {
     try {
@@ -250,6 +251,7 @@ export const createUserCart = (sendCartItems) => async (dispatch, getState) => {
     try {
         dispatch({ type: "IS_FETCHING" });
         await api.post('/cart/create', sendCartItems);
+        console.log("Cart created successfully");
         await dispatch(getUserCart());
     } catch (error) {
         console.log(error);
@@ -265,6 +267,7 @@ export const getUserCart = () => async (dispatch, getState) => {
     try {
         dispatch({ type: "IS_FETCHING" });
         const { data } = await api.get('/carts/users/cart');
+        console.log("Fetched user cart items");
         
         dispatch({
             type: "GET_USER_CART_PRODUCTS",
@@ -284,37 +287,61 @@ export const getUserCart = () => async (dispatch, getState) => {
 };
 
 
-export const createStripePaymentSecret 
-    = (sendData) => async (dispatch, getState) => {
-        try {
-            dispatch({ type: "IS_FETCHING" });
-            const { data } = await api.post("/order/stripe-client-secret", sendData);
-            dispatch({ type: "CLIENT_SECRET", payload: data });
-              localStorage.setItem("client-secret", JSON.stringify(data));
-              dispatch({ type: "IS_SUCCESS" });
-        } catch (error) {
-            console.log(error);
-            toast.error(error?.response?.data?.message || "Failed to create client secret");
-        }
+export const createStripePaymentSecret = (sendData) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: "IS_FETCHING" });
+        
+        // 1. Fetch data from backend
+        const { data } = await api.post("/order/stripe-client-secret", sendData);
+
+        // 2. IMPORTANT: If backend returns JSON { clientSecret: "..." }, extract it here!
+        // If your backend still returns a raw string, use 'data' directly.
+        const clientSecret = data.clientSecret || data; 
+
+        dispatch({ type: "CLIENT_SECRET", payload: clientSecret });
+        localStorage.setItem("client-secret", JSON.stringify(clientSecret));
+        dispatch({ type: "IS_SUCCESS" });
+
+    } catch (error) {
+        console.log(error);
+        // Safely handle error message
+        const message = error?.response?.data?.message || "Failed to create client secret";
+        // Assuming toast is imported or passed somehow, otherwise dispatch an error action
+        // toast.error(message); 
+        dispatch({ type: "IS_ERROR", payload: message }); 
+    }
 };
 
-
-export const stripePaymentConfirmation 
-    = (sendData, setErrorMesssage, setLoadng, toast) => async (dispatch, getState) => {
+// Action to confirm order in backend AFTER Stripe payment
+export const stripePaymentConfirmation = 
+    (sendData, setErrorMessage, setLoading, toast) => async (dispatch, getState) => {
         try {
-            const response  = await api.post("/order/users/payments/online", sendData);
+            // Start loading
+            setLoading(true); 
+
+            const response = await api.post("/order/users/payments/online", sendData);
+            
             if (response.data) {
+                // Clear local storage
                 localStorage.removeItem("CHECKOUT_ADDRESS");
                 localStorage.removeItem("cartItems");
                 localStorage.removeItem("client-secret");
-                dispatch({ type: "REMOVE_CLIENT_SECRET_ADDRESS"});
-                dispatch({ type: "CLEAR_CART"});
+                
+                // Clear Redux state
+                dispatch({ type: "REMOVE_CLIENT_SECRET_ADDRESS" });
+                dispatch({ type: "CLEAR_CART" });
+                
                 toast.success("Order Accepted");
-              } else {
-                setErrorMesssage("Payment Failed. Please try again.");
-              }
+                // Navigate to success page here if needed
+            } else {
+                setErrorMessage("Payment verification failed. Please contact support.");
+            }
         } catch (error) {
-            setErrorMesssage("Payment Failed. Please try again.");
+            console.error("Payment Confirmation Error:", error);
+            setErrorMessage("Payment Failed. Please try again.");
+        } finally {
+            // 3. ALWAYS stop loading, whether success or fail
+            setLoading(false); 
         }
 };
 

@@ -16,12 +16,14 @@ import com.ecommerce.project.util.AuthUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -220,14 +222,27 @@ public class ProductServiceImpl implements ProductService {
         return modelMapper.map(savedProduct, ProductDTO.class);
 
     }
+
     @Override
+    @Transactional // Ensures cart removal and product deletion happen together or not at all
     public ProductDTO deleteProduct(Long productId) {
-            Product product= productRepository.findById(productId)
-                    .orElseThrow(()-> new ResourceNotFoundException("Product","productId",productId));
-            List<Cart> carts = cartRepository.findCartsByProductId(productId);
-            carts.forEach(cart -> cartService.deleteProductFromCart(cart.getCartId(),productId));
+        // 1. Find the product
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+
+        // 2. Remove product from all Carts (This is safe to do)
+        List<Cart> carts = cartRepository.findCartsByProductId(productId);
+        carts.forEach(cart -> cartService.deleteProductFromCart(cart.getCartId(), productId));
+
+        // 3. Attempt to delete the product
+        try {
             productRepository.delete(product);
-            return modelMapper.map(product, ProductDTO.class);
+        } catch (DataIntegrityViolationException e) {
+            // This catches the SQL error regarding 'order_items'
+            throw new APIException("Cannot delete this product because it has already been ordered by a customer.");
+        }
+
+        return modelMapper.map(product, ProductDTO.class);
     }
 
     @Override

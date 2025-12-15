@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom'
 import { stripePaymentConfirmation } from '../../store/actions';
 import toast from 'react-hot-toast';
+import Skeleton from '@mui/material/Skeleton';
 
 const PaymentConfirmation = () => {
     const location = useLocation();
@@ -44,7 +45,7 @@ const PaymentConfirmation = () => {
     <div className='min-h-screen flex items-center justify-center'>
         {loading ? (
             <div className='max-w-xl mx-auto'>
-                <Skeleton />
+                <Skeleton/>
           </div>
         ) : (
             <div className="p-8 rounded-lg shadow-lg text-center max-w-md mx-auto border border-gray-200">
