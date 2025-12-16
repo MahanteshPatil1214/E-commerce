@@ -73,6 +73,7 @@ public class WebSecurityConfig {
 
 
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
@@ -89,7 +90,8 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/public/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
-                                .requestMatchers("/images/**").permitAll()
+                                .requestMatchers("/images/**").permitAll() // Keep this
+                                .requestMatchers("/error").permitAll()     // <--- ADD THIS LINE
                                 .requestMatchers("/swagger-resources/**").permitAll()
                                 .requestMatchers("/webjars/**").permitAll()
                                 .requestMatchers("/swagger-ui.html").permitAll()
@@ -114,6 +116,11 @@ public class WebSecurityConfig {
 //                "/configuration/security",
 //                "/swagger-ui.html",
 //                "/webjars/**"));
+//    }
+
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().requestMatchers("/images/**");
 //    }
 
 

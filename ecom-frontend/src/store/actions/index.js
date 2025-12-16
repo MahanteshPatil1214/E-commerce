@@ -229,6 +229,44 @@ export const getUserAddresses = () => async (dispatch, getState) => {
     }
 };
 
+export const getUserProfile = () => async (dispatch) => {
+    try {
+        dispatch({ type: "IS_FETCHING" });
+        const { data } = await api.get(`/auth/user`);
+        dispatch({ type: "GET_USER_PROFILE", payload: data });
+        dispatch({ type: "IS_SUCCESS" });
+    } catch (error) {
+        console.log(error);
+        dispatch({ 
+            type: "IS_ERROR",
+            payload: error?.response?.data?.message || "Failed to fetch user profile",
+         });
+    }
+};
+
+export const getUserOrders = (queryString = "") => async (dispatch) => {
+    try {
+        dispatch({ type: "IS_FETCHING" });
+        const { data } = await api.get(`/order/users?${queryString}`);
+        dispatch({
+            type: "GET_USER_ORDERS",
+            payload: data.content,
+            pageNumber: data.pageNumber,
+            pageSize: data.pageSize,
+            totalElements: data.totalElements,
+            totalPages: data.totalPages,
+            lastPage: data.lastPage,
+        });
+        dispatch({ type: "IS_SUCCESS" });
+    } catch (error) {
+        console.log(error);
+        dispatch({ 
+            type: "IS_ERROR",
+            payload: error?.response?.data?.message || "Failed to fetch user orders",
+         });
+    }
+};
+
 export const selectUserCheckoutAddress = (address) => {
     localStorage.setItem("CHECKOUT_ADDRESS", JSON.stringify(address));
     

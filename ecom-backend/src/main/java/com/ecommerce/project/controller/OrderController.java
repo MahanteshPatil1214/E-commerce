@@ -72,6 +72,17 @@ public class OrderController {
         return new ResponseEntity<OrderResponse>(orderResponse,HttpStatus.OK);
     }
 
+    @GetMapping("/order/users")
+    public ResponseEntity<OrderResponse> getUserOrders(
+            @RequestParam(name = "pageNumber" ,defaultValue = AppConstants.PAGE_NUMBER ,required = false)Integer pageNumber,
+            @RequestParam(name = "pageSize",defaultValue = AppConstants.PAGE_SIZE ,required = false )Integer pageSize,
+            @RequestParam(name = "sortBy",defaultValue = AppConstants.SORT_ORDERS_BY ,required = false )String sortBY,
+            @RequestParam(name = "sortOrder" ,defaultValue = AppConstants.SORT_DIR ,required = false) String sortOrder
+    ){
+        OrderResponse orderResponse = orderService.getUserOrders(pageNumber,pageSize,sortBY,sortOrder);
+        return new ResponseEntity<OrderResponse>(orderResponse,HttpStatus.OK);
+    }
+
 
     @PutMapping("admin/orders/{orderId}/status")
     public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable Long orderId,

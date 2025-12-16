@@ -25,8 +25,10 @@ const ProductCard = ({
 
     const handleProductView = (product) => {
         if (!about) {
+            console.log('[ProductCard] handleProductView', product);
             setSelectedViewProduct(product);
             setOpenProductViewModal(true);
+            console.log('[ProductCard] modal open true');
         }
     };
 
@@ -36,7 +38,7 @@ const ProductCard = ({
 
     return (
         <div className="border rounded-lg shadow-xl overflow-hidden transition-shadow duration-300">
-            <div onClick={() => {
+            <div onClick={(e) => { e.stopPropagation();
                 handleProductView({
                     id: productId,
                     productName,
@@ -56,7 +58,7 @@ const ProductCard = ({
                 </img>
             </div>
             <div className="p-4">
-                <h2 onClick={() => {
+                <h2 onClick={(e) => { e.stopPropagation();
                 handleProductView({
                     id: productId,
                     productName,

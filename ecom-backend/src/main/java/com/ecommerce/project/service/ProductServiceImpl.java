@@ -16,6 +16,7 @@ import com.ecommerce.project.util.AuthUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -92,30 +93,36 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
+// Define cache name "products"
+// Create a unique key based on ALL parameters so filters work correctly
+    @Cacheable(value = "products", key = "#pageNumber + '-' + #pageSize + '-' + #sortBy + '-' + #sortOrder + '-' + #keyword + '-' + #category")
     public ProductResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder, String keyword, String category) {
+
         Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc")
-                ?Sort.by(sortBy).ascending()
-                :Sort.by(sortBy).descending();
-        Pageable pageDetails = PageRequest.of(pageNumber,pageSize,sortByAndOrder);
-        Specification<Product> spec = Specification.allOf();
-        if(keyword !=null && !keyword.isEmpty()){
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+
+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+        Specification<Product> spec = Specification.where(null); // Initialize empty spec
+
+        if (keyword != null && !keyword.isEmpty()) {
             spec = spec.and((root, query, criteriaBuilder) ->
                     criteriaBuilder.like(criteriaBuilder.lower(root.get("productName")),
-                            "%" + keyword.toLowerCase() + "%s"));
+                            "%" + keyword.toLowerCase() + "%")); // FIXED TYPO: removed extra "%s"
         }
-        if(category !=null && !category.isEmpty()){
+
+        if (category != null && !category.isEmpty()) {
             spec = spec.and((root, query, criteriaBuilder) ->
                     criteriaBuilder.like(root.get("category").get("categoryName"),
                             category));
         }
-        Page<Product> productPage = productRepository.findAll(spec,pageDetails);
+
+        Page<Product> productPage = productRepository.findAll(spec, pageDetails);
         List<Product> products = productPage.getContent();
-//        if (productList.isEmpty())
-//            throw new APIException("No Product created till now.");
 
         List<ProductDTO> productDTOS = products.stream()
                 .map(product -> {
-                    ProductDTO productDTO = modelMapper.map(product,ProductDTO.class);
+                    ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
                     productDTO.setImage(constructImageUrl(product.getImage()));
                     return productDTO;
                 })
@@ -128,6 +135,7 @@ public class ProductServiceImpl implements ProductService {
         productResponse.setTotalElements(productPage.getTotalElements());
         productResponse.setTotalPages(productPage.getTotalPages());
         productResponse.setLastPage(productPage.isLast());
+
         return productResponse;
     }
 
