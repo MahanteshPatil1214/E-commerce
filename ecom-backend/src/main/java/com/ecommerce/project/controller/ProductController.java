@@ -82,7 +82,7 @@ public class ProductController {
 
     }
 
-    @PutMapping("/products/{productId}/image")
+    @PutMapping("/admin/products/{productId}/image")
     public ResponseEntity<ProductDTO> updateProductImage(@PathVariable Long productId ,
                                                          @RequestParam("image")MultipartFile image) throws IOException {
         ProductDTO updatedProductImage = productService.updateProductImage(productId,image);
@@ -101,6 +101,7 @@ public class ProductController {
         return new ResponseEntity<>(productResponse,HttpStatus.OK);
     }
 
+    @GetMapping("/seller/products")
     public ResponseEntity<ProductResponse> getAllProductsForSeller(
             @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
             @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,

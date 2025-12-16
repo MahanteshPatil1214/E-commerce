@@ -510,18 +510,25 @@ export const addNewProductFromDashboard =
 export const deleteProduct = 
     (setLoader, productId, toast, setOpenDeleteModal, isAdmin) => async (dispatch, getState) => {
     try {
-        setLoader(true)
+        setLoader(true);
         const endpoint = isAdmin ? "/admin/products/" : "/seller/products/";
+        
         await api.delete(`${endpoint}${productId}`);
+        
         toast.success("Product deleted successfully");
-        setLoader(false);
-        setOpenDeleteModal(false);
+        setOpenDeleteModal(false); // Only close modal if success
         await dispatch(dashboardProductsAction());
+        
     } catch (error) {
         console.log(error);
         toast.error(
-            error?.response?.data?.message || "Some Error Occured"
-        )
+            error?.response?.data?.message || "Some Error Occurred"
+        );
+        // Do NOT close the modal here. Let the user see the error.
+    } finally {
+        // <--- ADD THIS BLOCK
+        // This runs whether it succeeds OR fails, ensuring the spinner always stops.
+        setLoader(false); 
     }
 };
 

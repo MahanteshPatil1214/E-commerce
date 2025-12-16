@@ -11,11 +11,13 @@ import com.ecommerce.project.payload.ProductDTO;
 import com.ecommerce.project.payload.ProductResponse;
 import com.ecommerce.project.repositories.CartRepository;
 import com.ecommerce.project.repositories.CategoryRepository;
+import com.ecommerce.project.repositories.OrderItemRepository;
 import com.ecommerce.project.repositories.ProductRepository;
 import com.ecommerce.project.util.AuthUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -35,6 +37,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Autowired
     private CartRepository cartRepository;
@@ -61,6 +66,8 @@ public class ProductServiceImpl implements ProductService {
     private String imageBaseUrl;
 
     @Override
+    @Transactional
+    @CacheEvict(value = "products", allEntries = true)
     public ProductDTO addProduct(Long categoryId, ProductDTO productDTO) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() ->
@@ -93,9 +100,8 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-// Define cache name "products"
-// Create a unique key based on ALL parameters so filters work correctly
-    @Cacheable(value = "products", key = "#pageNumber + '-' + #pageSize + '-' + #sortBy + '-' + #sortOrder + '-' + #keyword + '-' + #category")
+// CHANGED VALUE to "products_v2" to force a fresh fetch (ignoring old broken cache)
+    @Cacheable(value = "products_v2", key = "#pageNumber + '-' + #pageSize + '-' + #sortBy + '-' + #sortOrder + '-' + #keyword + '-' + #category")
     public ProductResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder, String keyword, String category) {
 
         Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc")
@@ -103,14 +109,22 @@ public class ProductServiceImpl implements ProductService {
                 : Sort.by(sortBy).descending();
 
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
-        Specification<Product> spec = Specification.where(null); // Initialize empty spec
 
+        // 1. Start with Empty Specification
+        Specification<Product> spec = Specification.allOf();
+
+        // 2. FILTER: Only fetch Active products
+        spec = spec.and((root, query, criteriaBuilder) ->
+                criteriaBuilder.isTrue(root.get("isActive")));
+
+        // 3. FILTER: Search by Keyword
         if (keyword != null && !keyword.isEmpty()) {
             spec = spec.and((root, query, criteriaBuilder) ->
                     criteriaBuilder.like(criteriaBuilder.lower(root.get("productName")),
-                            "%" + keyword.toLowerCase() + "%")); // FIXED TYPO: removed extra "%s"
+                            "%" + keyword.toLowerCase() + "%"));
         }
 
+        // 4. FILTER: Filter by Category
         if (category != null && !category.isEmpty()) {
             spec = spec.and((root, query, criteriaBuilder) ->
                     criteriaBuilder.like(root.get("category").get("categoryName"),
@@ -123,6 +137,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDTO> productDTOS = products.stream()
                 .map(product -> {
                     ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
+                    // Ensure constructImageUrl is available in this class
                     productDTO.setImage(constructImageUrl(product.getImage()));
                     return productDTO;
                 })
@@ -138,7 +153,6 @@ public class ProductServiceImpl implements ProductService {
 
         return productResponse;
     }
-
     private String constructImageUrl(String imageName){
         return imageBaseUrl.endsWith("/") ? imageBaseUrl + imageName : imageName + "/" + imageName;
     }
@@ -232,23 +246,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional // Ensures cart removal and product deletion happen together or not at all
+    @Transactional
+    @CacheEvict(value = "products_v2", allEntries = true)
     public ProductDTO deleteProduct(Long productId) {
-        // 1. Find the product
+        // A. Find the product first
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
 
-        // 2. Remove product from all Carts (This is safe to do)
+        // B. THE BLOCKING LOGIC
+        // Check if this product exists in any past order
+        boolean isOrdered = orderItemRepository.existsByProductProductId(productId);
+
+        if (isOrdered) {
+            // Stop right here and throw the specific message
+            throw new APIException("Cannot delete this product because it has been ordered by a customer.");
+        }
+
+        // C. If NOT ordered, proceed with cleanup
+        // Remove from carts (optional, but good practice)
         List<Cart> carts = cartRepository.findCartsByProductId(productId);
         carts.forEach(cart -> cartService.deleteProductFromCart(cart.getCartId(), productId));
 
-        // 3. Attempt to delete the product
-        try {
-            productRepository.delete(product);
-        } catch (DataIntegrityViolationException e) {
-            // This catches the SQL error regarding 'order_items'
-            throw new APIException("Cannot delete this product because it has already been ordered by a customer.");
-        }
+        // D. Perform the Delete
+        // (You can use Soft Delete or Hard Delete here. Soft Delete is still safer.)
+        product.setActive(false);
+        productRepository.save(product);
 
         return modelMapper.map(product, ProductDTO.class);
     }

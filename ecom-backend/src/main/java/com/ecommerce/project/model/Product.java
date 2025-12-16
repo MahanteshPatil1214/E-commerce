@@ -43,4 +43,15 @@ public class Product {
 
     @OneToMany(mappedBy = "product" ,cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
     private List<CartItem> products = new ArrayList<>();
+
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 }
