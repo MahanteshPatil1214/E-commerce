@@ -19,16 +19,15 @@ const ProductCard = ({
 }) => {
     const [openProductViewModal, setOpenProductViewModal] = useState(false);
     const btnLoader = false;
-    const [selectedViewProduct, setSelectedViewProduct] = useState("");
+    const [selectedViewProduct, setSelectedViewProduct] = useState(null);
     const isAvailable = quantity && Number(quantity) > 0;
     const dispatch = useDispatch();
 
     const handleProductView = (product) => {
         if (!about) {
-            console.log('[ProductCard] handleProductView', product);
+            console.log('open product modal', product);
             setSelectedViewProduct(product);
             setOpenProductViewModal(true);
-            console.log('[ProductCard] modal open true');
         }
     };
 
@@ -38,7 +37,7 @@ const ProductCard = ({
 
     return (
         <div className="border rounded-lg shadow-xl overflow-hidden transition-shadow duration-300">
-            <div onClick={(e) => { e.stopPropagation();
+            <div onClick={() => {
                 handleProductView({
                     id: productId,
                     productName,
@@ -58,7 +57,7 @@ const ProductCard = ({
                 </img>
             </div>
             <div className="p-4">
-                <h2 onClick={(e) => { e.stopPropagation();
+                <h2 onClick={() => {
                 handleProductView({
                     id: productId,
                     productName,

@@ -6,3 +6,12 @@ const api = axios.create({
 });
 
 export default api;
+
+export const summarizeProduct = async (product) => {
+    const payload = {
+        name: product.productName,
+        description: product.description,
+    };
+    const res = await api.post('/ai/summarize', payload);
+    return res.data; // { summary: '...' }
+};
