@@ -11,6 +11,7 @@ function ProductViewModal({open, setOpen, product = {}, isAvailable}) {
   const [summary, setSummary] = useState(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState(null);
+  const [aiJustLoaded, setAiJustLoaded] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   }
@@ -80,9 +81,13 @@ function ProductViewModal({open, setOpen, product = {}, isAvailable}) {
                 <p>{description}</p>
 
                 {summary && (
-                  <div className="mt-3 p-3 bg-gray-50 rounded-md">
-                    <h4 className="font-medium text-sm mb-1">AI Summary</h4>
-                    <p className="text-sm text-gray-800">{summary}</p>
+                  <div className={`mt-3 p-4 rounded-lg text-sm text-slate-900 bg-gradient-to-r from-sky-50 to-white border transition-all duration-300 ${aiJustLoaded ? 'ring-2 ring-sky-300 shadow-lg' : 'border-gray-100'}`} aria-live="polite">
+                    <div className="flex items-start gap-3">
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-sky-600 text-white text-[11px] font-semibold select-none">AI</span>
+                        <div className="flex-1">
+                            <div className="text-sm text-slate-900 text-center leading-6">{summary}</div>
+                        </div>
+                    </div>
                   </div>
                 )}
 
@@ -100,7 +105,11 @@ function ProductViewModal({open, setOpen, product = {}, isAvailable}) {
                   setAiLoading(true);
                   try {
                     const res = await summarizeProduct(product);
-                    setSummary(res?.summary || "");
+                    const txt = res?.summary || '';
+                    setSummary(txt);
+                    // briefly highlight new summary
+                    setAiJustLoaded(true);
+                    setTimeout(() => setAiJustLoaded(false), 2000);
                   } catch (err) {
                     setAiError('Failed to generate summary');
                   } finally {

@@ -209,3 +209,57 @@ Key environment variables used by the project (examples):
 ## Contact
 
 - For questions about the codebase, review `ecom-backend/HELP.md` and the frontend `README.md` (if present) for local notes.
+
+## AI Integration (Gemini)
+
+This project includes a first-pass integration of generative AI features (product summarization) using Google Generative Language (Gemini) through a Spring-backed API. The feature is implemented for developer/testing purposes and includes UI affordances to surface AI-generated summaries inline on product cards and inside the product detail modal.
+
+What was added
+- Backend: a small AI service and controller that call the Generative Language API using Spring WebClient. Key files:
+  - `ecom-backend/pom.xml` — added `spring-boot-starter-webflux` for `WebClient` support.
+  - `ecom-backend/src/main/java/com/ecommerce/ai/AiService.java` — calls the model endpoint, handles API key fallback and errors.
+  - `ecom-backend/src/main/java/com/ecommerce/ai/AiController.java` — POST `/api/ai/summarize` endpoint used by the frontend.
+  - `ecom-backend/src/main/java/com/ecommerce/project/SbComApplication.java` — adjusted component scanning and a development CORS config to allow `http://localhost:5173`.
+
+- Frontend: wiring and UI for requesting and displaying summaries.
+  - `ecom-frontend/src/api/api.js` — added `summarizeProduct(product)` helper that POSTs to the backend summarize endpoint.
+  - `ecom-frontend/src/components/shared/ProductCard.jsx` — inline “Summarize” button and a prominent AI-styled summary card (badge, soft gradient, centered text, transient highlight).
+  - `ecom-frontend/src/components/shared/ProductViewModal.jsx` — modal-level Summarize action and matching AI-styled summary display.
+
+How it behaves
+- Click the `Summarize` button on a product card or in the product modal to request a short AI summary for that product.
+- The UI shows an `AI` badge, a rounded card with a soft sky gradient, and a short ring/shadow highlight when a new summary appears to emphasize that the content was AI-generated.
+- The backend returns friendly error messages (e.g., model or auth problems) if the configured model name or API key is invalid.
+
+Run & configuration (dev)
+1. Provide the Google API key for Generative Language in the environment. The backend looks for the `ai.api.key` property in `application.properties` and falls back to the environment variable `GOOGLE_API_KEY` if the property is unset. Example (PowerShell):
+
+```powershell
+SET GOOGLE_API_KEY=your_google_api_key_here
+```
+
+2. Start the backend (from `ecom-backend`):
+
+```powershell
+./mvnw spring-boot:run
+```
+
+3. Start the frontend (from `ecom-frontend`):
+
+```bash
+npm install
+npm run dev
+```
+
+Notes & security
+- The current implementation is for development and demonstration. Before using in production you should:
+  - Store API keys and secrets in a secure secret manager (not checked into `application.properties`).
+  - Add authentication and rate-limiting to the AI endpoint to prevent abuse and billing surprises.
+  - Prefer OAuth/service-account flows or Google Cloud IAM bindings where appropriate for production access to Google services.
+  - Validate and sanitize model responses when displaying them in the UI (consider safety filters, length limits, and user controls for regenerating or dismissing results).
+
+Next steps (suggestions)
+- Add server-side caching for summaries and a model discovery endpoint so the UI can show available models.
+- Add a small per-user or per-session cache to reduce repeated API calls for the same product.
+- Add logging/metrics and a usage dashboard to monitor costs and request success/failure rates.
+
