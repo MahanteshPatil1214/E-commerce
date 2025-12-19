@@ -2104,3 +2104,235 @@ Caused by: java.lang.RuntimeException: Failed to load driver class org.postgresq
 2025-12-19 13:01:09.222 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-12-19 13:01:09.230 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-12-19 13:01:10.779 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-19 15:59:29.709 [main] INFO  c.ecommerce.project.SbComApplication - Starting SbComApplication using Java 17.0.11 with PID 9112 (E:\ecom\ecom-backend\target\classes started by bhagy in E:\ecom\ecom-backend)
+2025-12-19 15:59:29.715 [main] DEBUG c.ecommerce.project.SbComApplication - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-12-19 15:59:29.717 [main] INFO  c.ecommerce.project.SbComApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-19 15:59:32.310 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-19 15:59:32.314 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-19 15:59:33.004 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 670 ms. Found 10 JPA repository interfaces.
+2025-12-19 15:59:33.191 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-19 15:59:33.195 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-19 15:59:33.536 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.AddressRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.542 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.CartItemRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.559 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.CartRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.561 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.CategoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.578 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.OrderItemRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.580 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.OrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.589 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.PaymentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.594 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.599 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.604 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 15:59:33.605 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 232 ms. Found 0 Redis repository interfaces.
+2025-12-19 15:59:36.044 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-19 15:59:36.061 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-19 15:59:36.064 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-19 15:59:36.065 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-12-19 15:59:36.200 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-12-19 15:59:36.201 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6337 ms
+2025-12-19 15:59:36.379 [main] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'authTokenFilter': Unsatisfied dependency expressed through field 'jwtUtils': Error creating bean with name 'jwtUtils': Injection of autowired dependencies failed
+2025-12-19 15:59:36.534 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-12-19 15:59:36.593 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2025-12-19 15:59:36.628 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-19 15:59:36.680 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:170)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.ecommerce.project.SbComApplication.main(SbComApplication.java:13)
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:517)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:219)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:193)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:167)
+	... 8 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authTokenFilter': Unsatisfied dependency expressed through field 'jwtUtils': Error creating bean with name 'jwtUtils': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:230)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:184)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:179)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:164)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:96)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:271)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:245)
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4464)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:412)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:438)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
+	... 13 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtUtils': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1683)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	... 55 common frames omitted
+Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'JWT_SECRET' in value "${JWT_SECRET}" <-- "${spring.app.jwtSecret}"
+	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81)
+	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:423)
+	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:128)
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:118)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:114)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:293)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:264)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:186)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:971)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1650)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	... 65 common frames omitted
+2025-12-19 16:07:07.264 [main] INFO  c.ecommerce.project.SbComApplication - Starting SbComApplication using Java 17.0.11 with PID 22664 (E:\ecom\ecom-backend\target\classes started by bhagy in E:\ecom\ecom-backend)
+2025-12-19 16:07:07.270 [main] DEBUG c.ecommerce.project.SbComApplication - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-12-19 16:07:07.274 [main] INFO  c.ecommerce.project.SbComApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-19 16:07:08.871 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-19 16:07:08.873 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-19 16:07:09.132 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 242 ms. Found 10 JPA repository interfaces.
+2025-12-19 16:07:09.160 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-19 16:07:09.161 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-19 16:07:09.184 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.AddressRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.185 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.CartItemRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.185 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.CartRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.185 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.CategoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.185 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.OrderItemRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.186 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.OrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.186 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.PaymentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.186 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.186 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.187 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ecommerce.project.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-12-19 16:07:09.187 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2025-12-19 16:07:10.176 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-19 16:07:10.194 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-19 16:07:10.198 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-19 16:07:10.199 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-12-19 16:07:10.327 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-12-19 16:07:10.328 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2962 ms
+2025-12-19 16:07:11.229 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-19 16:07:11.284 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-19 16:07:13.165 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4037cdb0
+2025-12-19 16:07:13.166 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-19 16:07:20.004 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-19 16:07:20.500 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-19 16:07:21.283 [main] DEBUG c.e.p.security.jwt.AuthTokenFilter - Filter 'authTokenFilter' configured for use
+2025-12-19 16:07:21.283 [main] DEBUG c.e.p.security.jwt.AuthTokenFilter - Filter 'authenticationJwtTokenFilter' configured for use
+2025-12-19 16:07:22.207 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-12-19 16:07:22.208 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-12-19 16:07:23.112 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-19 16:07:24.260 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-19 16:07:24.278 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-19 16:07:24.292 [main] INFO  c.ecommerce.project.SbComApplication - Started SbComApplication in 17.845 seconds (process running for 18.373)
+2025-12-19 16:15:59.089 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-19 16:15:59.090 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-19 16:15:59.091 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-19 16:15:59.154 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /api/public/products
+2025-12-19 16:16:00.206 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:00.212 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /api/public/products
+2025-12-19 16:16:00.875 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:03.550 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:03.550 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:03.550 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:04.167 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:04.168 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:04.250 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:04.250 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:04.251 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:04.251 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:04.465 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:04.560 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:04.561 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:08.432 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:08.432 [http-nio-8080-exec-6] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:08.434 [http-nio-8080-exec-7] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:08.455 [http-nio-8080-exec-9] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /api/public/categories
+2025-12-19 16:16:08.455 [http-nio-8080-exec-8] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /api/public/products
+2025-12-19 16:16:08.910 [http-nio-8080-exec-9] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:08.910 [http-nio-8080-exec-7] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:08.910 [http-nio-8080-exec-8] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:08.911 [http-nio-8080-exec-6] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:08.911 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:08.911 [http-nio-8080-exec-9] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /api/public/categories
+2025-12-19 16:16:08.911 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:08.911 [http-nio-8080-exec-6] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:08.911 [http-nio-8080-exec-8] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /api/public/products
+2025-12-19 16:16:08.911 [http-nio-8080-exec-7] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:09.368 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:09.542 [http-nio-8080-exec-9] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:09.568 [http-nio-8080-exec-6] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:09.570 [http-nio-8080-exec-7] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:09.587 [http-nio-8080-exec-8] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:09.740 [http-nio-8080-exec-10] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:09.741 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:09.743 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:10.084 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.085 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:10.095 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.096 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:10.125 [http-nio-8080-exec-10] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.125 [http-nio-8080-exec-10] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:10.489 [http-nio-8080-exec-1] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.491 [http-nio-8080-exec-2] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.565 [http-nio-8080-exec-10] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.648 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:10.649 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:10.648 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:10.986 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.986 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/fafe49d3-6539-424c-a5d6-2780acf69056.jpg
+2025-12-19 16:16:10.988 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:10.990 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/8effa463-4171-46d8-bb2c-647d15e2a59c.jpg
+2025-12-19 16:16:11.006 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:11.006 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - AuthTokenFilter called for URI: /images/bed24f00-06bc-470d-be8c-84f85f994970.jpg
+2025-12-19 16:16:11.400 [http-nio-8080-exec-4] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:11.400 [http-nio-8080-exec-5] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:16:11.400 [http-nio-8080-exec-3] DEBUG c.e.p.security.jwt.AuthTokenFilter - Roles from JWT: [ROLE_USER]
+2025-12-19 16:17:57.747 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-19 16:17:57.819 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-19 16:17:57.863 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-19 16:17:57.874 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-19 16:17:58.691 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
