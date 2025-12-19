@@ -24,7 +24,7 @@ public class CachingConfig {
                 // Store values as JSON
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
                 // Set default expiration time (e.g., 60 minutes)
-                .entryTtl(Duration.ofMinutes(60))
+                .entryTtl(Duration.ofSeconds(60))
                 .enableTimeToIdle()
                 .disableCachingNullValues();
 

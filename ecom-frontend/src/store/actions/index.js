@@ -516,19 +516,19 @@ export const deleteProduct =
         await api.delete(`${endpoint}${productId}`);
         
         toast.success("Product deleted successfully");
-        setOpenDeleteModal(false); // Only close modal if success
-        await dispatch(dashboardProductsAction());
+        setOpenDeleteModal(false);
+
+        // --- FIX IS HERE ---
+        // You cannot leave this empty! You must pass the arguments.
+        // We use default values or grab them from the current state if available.
+        // Example: keyword="", pageNumber=0
+        await dispatch(dashboardProductsAction("", 0)); 
         
     } catch (error) {
         console.log(error);
-        toast.error(
-            error?.response?.data?.message || "Some Error Occurred"
-        );
-        // Do NOT close the modal here. Let the user see the error.
+        toast.error(error?.response?.data?.message || "Error Occurred");
     } finally {
-        // <--- ADD THIS BLOCK
-        // This runs whether it succeeds OR fails, ensuring the spinner always stops.
-        setLoader(false); 
+        setLoader(false);
     }
 };
 

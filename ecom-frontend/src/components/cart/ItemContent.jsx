@@ -52,10 +52,17 @@ const ItemContent = ({
                 </div>
 
                 <div className="md:w-36 sm:w-24 w-12">
-                    <img 
+                    {/* <img 
                         src={`${import.meta.env.VITE_BACK_END_URL}/images/${image}`}
                         alt={productName}
-                        className="md:h-36 sm:h-24 h-12 w-full object-cover rounded-md"/>
+                        className="md:h-36 sm:h-24 h-12 w-full object-cover rounded-md"/> */}
+                    <img 
+                        src={image && image.startsWith("http") 
+                            ? image 
+                            : `${import.meta.env.VITE_BACK_END_URL}/images/${image}`}
+                         alt={productName}
+                        className="md:h-36 sm:h-24 h-12 w-full object-cover rounded-md"
+                    />
                 
 
                 <div className="flex items-start gap-5 mt-3">

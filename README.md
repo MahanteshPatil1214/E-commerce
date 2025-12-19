@@ -118,7 +118,8 @@ SET STRIPE_SECRET_KEY=sk_test_...
 API docs (Swagger UI) are available when the backend is running at:
 
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui/index.html  (interactive Swagger UI)
+http://localhost:8080/v3/api-docs            (OpenAPI JSON)
 ```
 
 ## Frontend — Setup & Run
@@ -193,6 +194,11 @@ Key environment variables used by the project (examples):
 - If the frontend dev server shows `use --host to expose`, run `npm run dev -- --host` to access from network.
 - Check `application.properties` and environment variables if DB connections fail.
 
+Logs
+  - By default the backend uses Logback. A `logback-spring.xml` is included and writes to `logs/app.log` and console.
+  - Set `LOG_PATH` environment variable to change the logs folder, e.g.: `SET LOG_PATH=./logs` (PowerShell).
+  - Tail logs during development with `Get-Content .\\logs\\app.log -Wait` (PowerShell).
+
 ## Project Structure (high level)
 
 - `ecom-backend/` — Java backend source, `pom.xml`, `src/main/java/com/ecommerce` and resources.
@@ -202,9 +208,6 @@ Key environment variables used by the project (examples):
 
 - Feel free to open issues and submit pull requests. For major changes, open an issue first to discuss the change.
 
-## License
-
-- Add a LICENSE file at project root if you want to specify licensing terms. Currently none is declared in this repo.
 
 ## Contact
 
@@ -232,10 +235,10 @@ How it behaves
 - The backend returns friendly error messages (e.g., model or auth problems) if the configured model name or API key is invalid.
 
 Run & configuration (dev)
-1. Provide the Google API key for Generative Language in the environment. The backend looks for the `ai.api.key` property in `application.properties` and falls back to the environment variable `GOOGLE_API_KEY` if the property is unset. Example (PowerShell):
+1. Provide the AI key for Generative Language in the environment. The backend reads `ai.api.key` (or `AI_API_KEY`) and will fall back to `GOOGLE_API_KEY` if present. Set an env var before starting the app. Example (PowerShell):
 
 ```powershell
-SET GOOGLE_API_KEY=your_google_api_key_here
+SET AI_API_KEY=your_google_api_key_here
 ```
 
 2. Start the backend (from `ecom-backend`):
